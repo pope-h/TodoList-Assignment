@@ -27,6 +27,14 @@ contract TodoList {
         todo.title = _newTitle;
     }
 
+    function getTitles() external view returns (string[] memory) {
+        string[] memory titles = new string[](todoArray.length);
+        for (uint i = 0; i < todoArray.length; i++) {
+            titles[i] = todoArray[i].title;
+        }
+        return titles;
+    }
+
     function addItem(uint _index, string memory _text) external {
         require(_index < todoArray.length, "Invalid Todo index");
 
