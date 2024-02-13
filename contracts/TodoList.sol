@@ -20,6 +20,13 @@ contract TodoList {
         todoArray.push(todo);
     }
 
+    function updateTitle(uint _index, string memory _newTitle) external {
+        require(_index < todoArray.length, "Invalid Todo index");
+
+        Todo storage todo = todoArray[_index];
+        todo.title = _newTitle;
+    }
+
     function addItem(uint _index, string memory _text) external {
         require(_index < todoArray.length, "Invalid Todo index");
 
