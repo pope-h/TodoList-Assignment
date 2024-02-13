@@ -27,4 +27,10 @@ contract TodoList {
         require(emptyIndex < todo.text.length, "No space for new text");
         todo.text[emptyIndex] = _text;
     }
+
+    function getList(uint _index) external view returns (string memory, string[5] memory, bool) {
+        require(_index < todoArray.length, "Invalid Todo index");
+        Todo memory todo = todoArray[_index];
+        return (todo.title, todo.text, todo.completed);
+    }
 }
