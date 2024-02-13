@@ -66,4 +66,9 @@ contract TodoList {
         Todo memory todo = todoArray[_index];
         return (todo.title, todo.text, todo.completed);
     }
+
+    function toggleCompleted(uint _index) external {
+        Todo storage todo = todoArray[_index];
+        todo.completed = !todo.completed;
+    }
 }
