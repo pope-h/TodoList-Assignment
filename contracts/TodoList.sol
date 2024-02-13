@@ -87,6 +87,9 @@ contract TodoList {
         Todo storage todo = todoArray[_arrayIndex];
         require(_itemIndex < todo.text.length, "Item index out of bounds");
 
-        delete todo.text[_itemIndex];
+        if (_itemIndex < todo.text.length - 1) {
+        todo.text[_itemIndex] = todo.text[todo.text.length - 1];
+    }
+    delete todo.text[todo.text.length - 1];
     }
 }
