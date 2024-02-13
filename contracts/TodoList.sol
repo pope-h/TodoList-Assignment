@@ -51,6 +51,16 @@ contract TodoList {
         todo.text[emptyIndex] = _text;
     }
 
+    function updateItem(uint _arrayIndex, uint _itemIndex, string memory _newText) external {
+        require(_arrayIndex < todoArray.length, "Invalid Todo index");
+
+        Todo storage todo = todoArray[_arrayIndex];
+        for (uint i=0; i < todo.text.length; i++) {
+            require(keccak256(bytes(todo.text[i])) != keccak256(bytes(_newText)), "Item already in list");
+        }
+        todo.text[_itemIndex] = _newText;
+    }
+
     function getList(uint _index) external view returns (string memory, string[5] memory, bool) {
         require(_index < todoArray.length, "Invalid Todo index");
         Todo memory todo = todoArray[_index];
