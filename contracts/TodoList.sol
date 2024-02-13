@@ -39,6 +39,10 @@ contract TodoList {
         require(_index < todoArray.length, "Invalid Todo index");
 
         Todo storage todo = todoArray[_index];
+        for (uint i=0; i < todo.text.length; i++) {
+            require(keccak256(bytes(todo.text[i])) != keccak256(bytes(_text)), "Item already in list");
+        }
+
         uint8 emptyIndex = 0;
         while (emptyIndex < todo.text.length && bytes(todo.text[emptyIndex]).length > 0) {
             emptyIndex++;
