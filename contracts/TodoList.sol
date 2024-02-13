@@ -1,0 +1,30 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract TodoList {
+    struct Todo {
+        string title;
+        string[5] text;
+        bool completed;
+    }
+
+    Todo[] public todoArray;
+
+    function createTodo(string memory _title) external {
+        Todo memory todo;
+        todo.title = _title;
+        todoArray.push(todo);
+    }
+
+    function addItem(uint _index, string memory _text) external {
+        require(_index < todoArray.length, "Invalid Todo index");
+
+        Todo storage todo = todoArray[_index];
+        uint8 emptyIndex = 0;
+        while (emptyIndex < todo.text.length && bytes(todo.text[emptyIndex]).length > 0) {
+            emptyIndex++;
+        }
+        require(emptyIndex < todo.text.length, "No space for new text");
+        todo.text[emptyIndex] = _text;
+    }
+}
