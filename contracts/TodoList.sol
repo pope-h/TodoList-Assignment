@@ -80,4 +80,13 @@ contract TodoList {
         }
         todoArray.pop();
     }
+
+    function removeItem(uint _arrayIndex, uint _itemIndex) external {
+        require(_arrayIndex < todoArray.length, "index out of bound");
+
+        Todo storage todo = todoArray[_arrayIndex];
+        require(_itemIndex < todo.text.length, "Item index out of bounds");
+
+        delete todo.text[_itemIndex];
+    }
 }
