@@ -71,4 +71,13 @@ contract TodoList {
         Todo storage todo = todoArray[_index];
         todo.completed = !todo.completed;
     }
+
+    function removeList(uint _index) external {
+        require(_index < todoArray.length, "index out of bound");
+
+        for (uint i = _index; i < todoArray.length - 1; i++) {
+            todoArray[i] = todoArray[i + 1];
+        }
+        todoArray.pop();
+    }
 }
