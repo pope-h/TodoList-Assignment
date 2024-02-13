@@ -11,6 +11,10 @@ contract TodoList {
     Todo[] public todoArray;
 
     function createTodo(string memory _title) external {
+        for (uint i = 0; i < todoArray.length; i++) {
+            require(keccak256(bytes(todoArray[i].title)) != keccak256(bytes(_title)), "Title already exists");
+        }
+
         Todo memory todo;
         todo.title = _title;
         todoArray.push(todo);
